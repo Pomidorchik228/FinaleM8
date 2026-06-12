@@ -4,19 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
   </head>
   <body>
-    <h1>FAQ</h1>
-    <form action="/request" method="POST">
-      <label>Вопрос:</label>
-      <input name="input-request" type="text" />
-      <button type="submit">Отправить</button>
-    </form>
+    <div class="chat">
+      {% for message in memory %} {% if message.role != 'system' %}
+      <div class="chat-{{message.role}}">
+        <p>{{ message.text }}</p>
+      </div>
+      {% endif %} {% endfor %}
 
-    {% for message in memory %} {% if message.role != 'system' %}
-    <div class="{{ message.role }}">
-      <p>{{ message.text }}</p>
+      <form class="chat-input-box" action="/request" method="POST">
+        <input
+          class="chat-input"
+          name="input-request"
+          type="text"
+          placeholder="Ваш вопрос здесь"
+        />
+        <button type="submit">Отправить</button>
+      </form>
     </div>
-    {% endif %} {% endfor %}
   </body>
 </html>
