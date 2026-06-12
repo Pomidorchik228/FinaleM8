@@ -12,9 +12,13 @@
       <input name="input-request" type="text" />
       <button type="submit">Отправить</button>
     </form>
-    {% for i in memory %}
-    <p>{{i.text}}</p>
-    {% endfor %}
+
+    {% for message in memory %} {% if message.role != 'system' %}
+    <div class="{{ message.role }}">
+      <p>{{ message.text }}</p>
+    </div>
+    {% endif %} {% endfor %}
+
     <p>{{ai_answer}}</p>
   </body>
 </html>
